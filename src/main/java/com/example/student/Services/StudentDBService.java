@@ -21,7 +21,7 @@ public class StudentDBService implements StudentService{
     @Override
     public Student getStudentById(Long studentId) throws StudentNotFoundException{
         Optional<Student> studentOptional = studentRepository.findById(studentId);
-        if(studentOptional == null){
+        if(studentOptional.isEmpty()){
             throw new StudentNotFoundException("Student "+studentId+" not found!!");
         }
         return studentOptional.get();
