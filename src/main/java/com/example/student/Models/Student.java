@@ -2,6 +2,7 @@ package com.example.student.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Table;
 import lombok.*;
 
 import java.util.Date;

@@ -23,5 +23,9 @@ public interface StudentService {
 
     //Deletes Student with mentioned Id and
     //returns message like " Student ID is Deleted Successfully!!!"
-    public String removeStudent(Long id) throws StudentNotFoundException;
+    public void removeStudent(Long id) throws StudentNotFoundException ;
+
+    public Student createOrReplaceStudent(Student student, Long id);
+
+    Student updateStudent(Student student, Long studentId) throws StudentNotFoundException;
 }

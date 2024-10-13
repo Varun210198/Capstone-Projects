@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @RestController
 public class StudentController {
 
@@ -44,9 +45,32 @@ public class StudentController {
         return StudentResponseDto.fromStudent(student);
     }
 
+//    @DeleteMapping("/student/{id}")
+//    public String deleteStudent(@PathVariable("id") long id)throws StudentNotFoundException{
+//        return  studentService.removeStudent(id);
+//    }
+
     @DeleteMapping("/student/{id}")
-    public String deleteStudent(@PathVariable("id") long id)throws StudentNotFoundException{
-        return  studentService.removeStudent(id);
+    public ResponseEntity<Void> deleteStudent(@PathVariable("id") Long id) throws StudentNotFoundException {
+        studentService.removeStudent(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        //return new ResponseEntity<>("Student Deleted Successfully.!",HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping("/student/{id}")
+    public ResponseEntity<StudentResponseDto> createOrReplaceStudent(@PathVariable("id") Long id, @RequestBody StudentRequestDto requestDto) {
+        Student student = studentService.createOrReplaceStudent(StudentRequestDto.toStudent(requestDto), id);
+        StudentResponseDto responseDto = new StudentResponseDto();
+        return  new ResponseEntity<>(StudentResponseDto.fromStudent(student), HttpStatus.OK);
+    }
+
+    @PatchMapping("/student/{id}")
+    public ResponseEntity<StudentResponseDto> updateStudent(@PathVariable Long id, @RequestBody StudentRequestDto requestDto) throws StudentNotFoundException{
+        Student student = studentService.updateStudent(StudentRequestDto.toStudent(requestDto), id);
+        return new ResponseEntity<>(StudentResponseDto.fromStudent(student), HttpStatus.OK);
+    }
+
+
+
 
 }

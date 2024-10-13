@@ -27,10 +27,7 @@ public class GlobalExceptionHandler {
         ErrorDto errorDto = new ErrorDto();
         errorDto.setStatus("FAILURE");
         errorDto.setMessage("Student Not Found!");
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Custom Header", "Custom Value");
-        return new ResponseEntity<>(errorDto, headers, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
     }
 
 }
